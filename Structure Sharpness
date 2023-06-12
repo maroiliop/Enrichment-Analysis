@@ -1,0 +1,36 @@
+
+//user to specify the folder that results will be saved
+directory= getDirectory("Choose a Directory");
+
+//Open ROI manager or clear past results if already open
+run("ROI Manager...");
+selectWindow("ROI Manager"); 
+roiManager("delete"); // remove the ROIs that exist already in the ROI manager 
+
+//Work on the filament channel
+//Duplicate and rename 
+run("Duplicate...", "title=actin_raw_for_sharpness duplicate channels=1");
+
+//Run Deriche to find sample edges
+run("Deriche...", "alpha=3.0");
+
+selectWindow("Canny-Deriche suppr 3.0");
+
+//Based on the Edges and the Raw data,measure and identify the Sharpest frames
+imageCalculator("Divide create stack", "Canny-Deriche suppr 3.0","actin_raw_for_sharpness");
+
+//Select the area to measure every frame
+selectWindow("Result of Canny-Deriche suppr 3.0");
+
+width=getWidth();
+height=getHeight();
+
+makeRectangle(0, 0, width, height);
+
+roiManager("Add");
+run("Set Measurements...", "area mean integrated display redirect=None decimal=3");
+roiManager("Multi Measure");
+
+//save the results as csv files
+name= getTitle();
+saveAs("Results", directory + name + ".csv");
