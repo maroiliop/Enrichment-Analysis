@@ -38,15 +38,16 @@ Inspired by the work of Sun et al., 2020, our semi-automated method calculates t
 
 ![Picture2](https://github.com/maroiliop/Enrichment-Analysis/assets/136265557/2b10ae22-8c92-4669-9cf7-ea93812fa0d9)
 
-Figure 2. Pipeline for F-actin ruffle enrichment analysis. Fluorescence staining with immune complexes (magenta) and Phalloidin (F-actin). Scale bar: 0.5 µm.
+Figure 2. Pipeline for signal segmentation. Fluorescence staining with immune complexes (magenta) and Phalloidin (F-actin). Scale bar: 0.5 µm.
 
 The immune complexes mask is used for immune complex identification using the “Analyse particles” command in FIJI by “Analyse particles” each immune complex is assigned a number, which is automatically recorded in the “ROI manager” table. Using these asigned numbers, we can identify each immune complex on the immune-complex raw intensity image and find their raw integrated density.To further identify the relative positions of immune complexes with respect to F-actin, the actin mask is inverted and thus represents the membrane space between the actin structures.
 
 ![Picture4](https://github.com/maroiliop/Enrichment-Analysis/assets/136265557/a2796c9e-414b-4f5f-b8a7-b8ac70acfee7)
-Figure 3. Pipeline for F-actin ruffle enrichment analysis. Fluorescence staining with immune complexes (magenta) and Phalloidin (F-actin). Scale bar: 0.5 µm.
+Figure 3. Pipeline for F-actin ruffle enrichment analysis. Visualisation of immune complexes on Actin (Green) and off Actin (or membrane, Magenta). Scale bar: 0.5 µm.
 
-By projecting of the number-assigned immune complex ROIs (from ROI manager) onto the F-actin mask and inverted F-actin mask (or membrane) we can identify the immune complexes that are “on” and “off” F-actin. Retrieving the raw integrated densities of immune complexes allows us to calculate the enrichment ratio:                                                               
-                                                               R=∑I(c,on)/∑I(c,on+off)                          
+By projecting of the number-assigned immune complex ROIs (from ROI manager) onto the F-actin mask and inverted F-actin mask (or membrane) we can identify the immune complexes that are “on” and “off” F-actin. Retrieving the raw integrated densities of immune complexes from the raw ICs MIP(3 frames), as either "on" or "off" actin, allows us to calculate the enrichment ratio:                                                               
+
+                                                            R=∑I(c,on)/∑I(c,on+off)                          
 
 where R is the enrichment ratio (R∈[0,1]), I(c,on) is the raw integrated density of immune complexes that overlap with actin filaments, and I(c,on+off) is the raw integrated density of all immune complexes in the ROI.
 
