@@ -1,0 +1,138 @@
+//STEP1// work on 3-sharpest frames
+
+//set ROI-image properties and make a maximum intensity projection (e.g. 0.6um) of ROI-image
+
+run("Properties...", "channels=2 slices=3 frames=1 unit=µm pixel_width=0.1100000 pixel_height=0.1100000 voxel_depth=0.2000000");
+directory= getDirectory("Choose a Directory");
+saveAs("Tiff", directory);
+run("Z Project...", "projection=[Max Intensity]");
+
+//STEP2// Actin Filament Channel
+
+//Rename filament channel
+run("Duplicate...", "title=[actin raw] duplicate channels=1");
+
+//create a low frequency filter of your ROI-image to remove low frequencies by subtraction
+run("Duplicate...", "title=[actin blur]");
+run("Gaussian Blur...", "sigma=3");
+imageCalculator("Subtract create", "actin raw","actin blur");
+
+
+//Restore the thickness of filaments that was lost 
+selectWindow("Result of actin raw");
+run("Duplicate...", " ");
+setThreshold(10, 65535);
+
+setOption("BlackBackground", true);
+run("Make Binary");
+
+selectWindow("Result of actin raw-1");
+run("Mexican Hat Filter", "radius=5");
+
+//Create the mask for filaments (Actin) and the filament inverted mask
+setThreshold(10, 65535);
+//run("Threshold...");
+
+
+
+//setThreshold(26, 255);
+run("Make Binary", "thresholded remaining black");
+run("Invert");
+run("Duplicate...", "title=[actin mask]");
+run("Duplicate...", "title=[actin mask invert]");
+run("Invert");
+
+
+//STEP3// Immune-Complexes Channel
+
+
+//make maximum intensity projection (0.6um) of ROI
+selectWindow(".tif");
+run("Z Project...", "projection=[Max Intensity]");
+
+//create a low frequency filter of your ROI-image to remove low frequencies by subtraction, 
+//in the filtrated image apply a LoG filter to boost the higher frequencies
+run("Duplicate...", "title=[ICs raw] duplicate channels=2");
+run("Duplicate...", "title=[ICs blur]");
+run("Gaussian Blur...", "sigma=5");
+imageCalculator("Subtract create", "ICs raw","ICs blur");
+selectWindow("Result of ICs raw");
+run("Duplicate...", "title=[ICs LoG]");
+run("Laplacian of Gaussian", "sigma=2 scale_normalised negate");
+
+//Create ICs channel mask
+run("Duplicate...", "title=[ICs mask]");
+setThreshold(1, 65535);
+
+//run("Threshold...");
+
+//Watershed filter to seperate masks of the ICs that are in very close proximity
+setOption("BlackBackground", true);
+run("Make Binary");
+run("Open");
+run("Watershed");
+selectWindow("Result of ICs raw");
+close();
+
+//Create Cluster (ICs) channel mask
+selectWindow("ICs mask");
+
+run("Divide...", "value=255");
+
+//Apply mask on Immune-Complex (ICs) channel, in order to use the raw ICs intensities for the Enrichment Analysis
+imageCalculator("Multiply create", "ICs raw","ICs mask");
+selectWindow("Result of ICs raw");
+
+//STEP4// Enrichment Analysis
+
+//Enrichment Analysis, Immune-complex (ICs) channel raw values after mask application are multiplied by the filament (actin) mask - resulting in 
+//an image where only the values from the ICs that overlap with actin structures are measured. Then the same procedure  
+//is repeated with the inverse of the filament (actin) mask, and those values are measured.
+run("Duplicate...", "title=ICs");
+selectWindow("actin mask");
+run("Divide...", "value=255.000");
+
+imageCalculator("Multiply create", "ICs","actin mask");
+selectWindow("Result of ICs");
+run("Duplicate...", "title=[Result of ICs_actin_mask]");
+
+selectWindow("Result of ICs");
+close();
+selectWindow("actin mask invert");
+run("Divide...", "value=255.000");
+
+imageCalculator("Multiply create", "ICs","actin mask invert");
+selectWindow("Result of ICs");
+
+imageCalculator("Multiply create", "ICs","actin mask invert");
+selectWindow("Result of ICs");
+
+
+run("Duplicate...", "title=[Result of ICs_actin inverse]");
+selectWindow("Result of ICs");
+close();
+selectWindow("Result of ICs_actin inverse");
+
+//STEP5//
+selectWindow("ROI Manager");  // remove the ROIs that exist already in the ROI manager 
+run("Close"); //closes ROI manager
+
+//Merge the Enrichment Analysis resulted images of Immune-Complexes (ICs) 
+// to see which clusters do overlap with the filaments and which aren't
+selectWindow("Result of ICs_actin_mask");
+selectWindow("Result of ICs_actin inverse");
+run("Merge Channels...", "c2=[Result of ICs_actin_mask] c6=[Result of ICs_actin inverse] create");
+run("Green");
+//Use the ICs Mask to identify the ICs in that ROI
+selectWindow("ICs mask");
+run("Multiply...", "value=255.000"); 
+//this adds the detected clusters to the ROI manager
+//by selecting the mask and referring back to the raw ICs with the mask
+//we can measure characteristics of individual ICs e.g. Area, Mean, IntDen, etc and use these 
+//for further analysis
+run("Analyze Particles...", "clear add"); 
+selectWindow("Composite"); 
+roiManager("Select", 0);
+selectWindow("ICs");
+roiManager("Deselect");
+roiManager("Measure");
