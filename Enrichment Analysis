@@ -117,17 +117,19 @@ selectWindow("Result of ICs_actin inverse");
 selectWindow("ROI Manager");  // remove the ROIs that exist already in the ROI manager 
 run("Close"); //closes ROI manager
 
-//Merge the Enrichment Analysis resulted images of Immune-Complexes (ICs) 
-// to see which clusters do overlap with the filaments and which aren't
+//Merge the resulted images of Immune-Complex masks (ICs) 
+// to visualise which ICs overlap with the filaments and which are not
 selectWindow("Result of ICs_actin_mask");
 selectWindow("Result of ICs_actin inverse");
 run("Merge Channels...", "c2=[Result of ICs_actin_mask] c6=[Result of ICs_actin inverse] create");
 run("Green");
+
+
 //Use the ICs Mask to identify the ICs in that ROI
 selectWindow("ICs mask");
 run("Multiply...", "value=255.000"); 
-//this adds the detected clusters to the ROI manager
-//by selecting the mask and referring back to the raw ICs with the mask
+//this step adds the detected ICs to the ROI manager
+//by selecting them in the ICs-mask and measuring the raw ICs values
 //we can measure characteristics of individual ICs e.g. Area, Mean, IntDen, etc and use these 
 //for further analysis
 run("Analyze Particles...", "clear add"); 
