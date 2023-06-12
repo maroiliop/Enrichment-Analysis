@@ -11,8 +11,8 @@ I have made this macro to assess spatial correlation between 2 fluorescent signa
 Based on our publication, we used regions of interest (ROIs) from widefield fluorescent z-stack image files (.tif) with 2 channels.
 
 The 1st channel is for an elongated structure like a filament (e.g. Actin) and the second channel is for a round structure like a cluster (e.g. Immune-Complex).
-Run `Sharp Ruffle` macro on the ROI-image stack to identify the 3 sharpest frames. Duplicate these 3 frames (2 channels) and run the `Enrichment Analysis` macro to identify the spatial coerrelation of the 2 signals.
-
+Run `Sharp Ruffle` macro on the ROI-image stack to identify the 3 sharpest frames. Duplicate these 3 frames (2 channels) and run the `Enrichment Analysis` macro to visualise the spatial coerrelation of the 2 signals.
+Based on the raw intensity of the round objects calculate the enrichment ratio as described in the `Enrichment Analysis` section.
 
 
 ## `Sharp Ruffle`
