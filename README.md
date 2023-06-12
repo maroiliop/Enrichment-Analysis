@@ -7,9 +7,13 @@ Copy the code (from browser or download as .txt first) and paste it in your macr
 you may need to specify the language in Language tab of the Macro window, select IJ1 Macro, and save it as a .ijm.
 
 # How to use 
-I have used this macro to assess spatial correlation between 2 fluorescent signals with different structures. Based on our publication we use regions of interest (ROIs) from widefield fluorescent z-stack image files (.tif) with 2 channels.
+I have made this macro to assess spatial correlation between 2 fluorescent signals with different structures.
+Based on our publication, we used regions of interest (ROIs) from widefield fluorescent z-stack image files (.tif) with 2 channels.
 
-The 1st channel is an elongated structure like a filament (e.g. Actin) and the second channel is a round structure like a cluster (e.g. Immune-Complex).
+The 1st channel is for an elongated structure like a filament (e.g. Actin) and the second channel is for a round structure like a cluster (e.g. Immune-Complex).
+Run `Sharp Ruffle` macro on the ROI-image stack to identify the 3 sharpest frames. Duplicate these 3 frames (2 channels) and run the `Enrichment Analysis` macro to identify the spatial coerrelation of the 2 signals.
+
+
 
 ## `Sharp Ruffle`
 
