@@ -20,7 +20,7 @@ Based on the raw intensity of the round objects calculate the enrichment ratio a
 The majority of Actin signal segmentation tools are designed to detect linear actin structures, while SharpRuffle is made to detect curly actin structures (e.g. Ruffles). 
 The first step to detect the sharpest z-stack frames of the filament was to detect structural edges in the image. Edge detection is a method that reduces noise in an image without removing significant details (edges, lines) that are important for the image. This filtering method is based on anisotropic diffusion, also known as Perona-Malik diffusion. Anisotropic diffusion is the process of producing blurred images of the original image and a convolution matrix, termed a kernel. In contrast with isotropic diffusion (e.g. Gaussian blurring) each resulting image is not only a blurred version of the previous one but a combination of the original image and a filter that examines the local content for any orientation anisotropy (Perona and Malik, 1990). 
 
-![Picture2](https://github.com/maroiliop/Enrichment-Analysis/assets/136265557/c7a62aa3-a272-4f46-8757-ed6d061029dc)
+![Picture3](https://github.com/maroiliop/Enrichment-Analysis/assets/136265557/8177daf0-9300-478b-be18-5aabe47c04c3)
 
 Figure 1. Pipeline analysis of the sharpest F-actin z-slices. Steps of image analysis to find the sharpest frames of the ROI z-stack, immune complexes (magenta) and F-actin (Phalloidin, green). Scale bar: 0.5 µm.
 
