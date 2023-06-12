@@ -1,5 +1,5 @@
 
-#//user to specify the folder that results will be saved
+//user to specify the folder that results will be saved
 directory= getDirectory("Choose a Directory");
 
 //Open ROI manager or clear past results if already open
