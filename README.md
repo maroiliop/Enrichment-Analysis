@@ -46,10 +46,10 @@ where R is the enrichment ratio (R∈[0,1]), I(c,on) is the raw integrated densi
 * In case of 0 signal from the elongated structure channel the pseudocolor will appear as green, in this example as if the immune-complexes are fully on actin, this is a color representation and nothing more, the intensity values of the raw ICs (round object) image is what matters.
 
 ### References
-Canny, J., 1986. A Computational Approach to Edge Detection. IEEE Trans. Pattern Anal. Mach. Intell. PAMI-8, 679–698. https://doi.org/10.1109/TPAMI.1986.4767851
-Iliopoulou, M., 2022. Subcapsular sinus macrophage sensing of extracellular matrix rigidity alters membrane topography and immune complex mobility. bioRxiv 518873; https://doi.org/10.1101/2022.12.02.518873
-Perona, P., Malik, J., 1990. Scale-space and edge detection using anisotropic diffusion. IEEE Trans. Pattern Anal. Machine Intell. 12, 629–639. https://doi.org/10.1109/34.56205
-Sun, X., Phua, D.Y.Z., Axiotakis, L., Smith, M.A., Blankman, E., Gong, R., Cail, R.C., Espinosa de Los Reyes, S., Beckerle, M.C., Waterman, C.M., Alushin, G.M., 2020. Mechanosensing through direct binding of tensed F-actin by LIM domains (preprint). Biophysics. https://doi.org/10.1101/2020.03.06.979245
-Weickert, J., 1998. Anisotropic Diﬀusion in Image Processing 184.
+- Canny, J., 1986. A Computational Approach to Edge Detection. IEEE Trans. Pattern Anal. Mach. Intell. PAMI-8, 679–698. https://doi.org/10.1109/TPAMI.1986.4767851
+- Iliopoulou, M., 2022. Subcapsular sinus macrophage sensing of extracellular matrix rigidity alters membrane topography and immune complex mobility. bioRxiv 518873; https://doi.org/10.1101/2022.12.02.518873
+- Perona, P., Malik, J., 1990. Scale-space and edge detection using anisotropic diffusion. IEEE Trans. Pattern Anal. Machine Intell. 12, 629–639. https://doi.org/10.1109/34.56205
+- Sun, X., Phua, D.Y.Z., Axiotakis, L., Smith, M.A., Blankman, E., Gong, R., Cail, R.C., Espinosa de Los Reyes, S., Beckerle, M.C., Waterman, C.M., Alushin, G.M., 2020. Mechanosensing through direct binding of tensed F-actin by LIM domains (preprint). Biophysics. https://doi.org/10.1101/2020.03.06.979245
+- Weickert, J., 1998. Anisotropic Diﬀusion in Image Processing 184.
 
-The description is part of my PhD thesis "Biophysical characteristics of antigen presentation by subcapsular sinus macrophages to B cells" and I will include a link once uploaded.
+- The description is part of my PhD thesis "Biophysical characteristics of antigen presentation by subcapsular sinus macrophages to B cells" and I will include a link once uploaded.
